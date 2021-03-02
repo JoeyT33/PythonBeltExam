@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <a href="/logout">Logout</a> | <a href="/myaccount/{{welcomeUser.id}}">Edit my Account</a>
+    <h3>Welcome {{welcomeUser.first_name}} {{welcomeUser.last_name}}!</h3>
+    {% if messages %}
+    {% for message in messages %}
+    <p style="color: red;">{{message}}</p>
+    {% endfor %}
+    {% endif %}
+    <h3>Add a Quote!</h3>
+    <form action="/addQuote" method="post">
+        {% csrf_token %}
+        <p>Author First Name: <input type="text" name="afname" id=""></p>
+        <p>Author Last Name: <input type="text" name="alname" id=""></p>
+        <p>Quote: <textarea name="quote" id="" cols="30" rows="10"></textarea></p>
+        <input type="submit" value="Submit!">
+    </form>
+    <h3>Quotes</h3>
+    {% for quote in allquotes %}
+    <p>{{quote.firstName}} {{quote.lastName}}: {{quote.quote}}</p>
+    <p>Posted by: <a href="/viewQuotes/{{quote.postedBy.id}}">{{quote.postedBy.first_name}} {{quote.postedBy.last_name}}</a> </p>
+    <p>{{quote.likedBy.all.count}} like this! <a href="/likeThis/{{quote.id}}">Like</a></p>
+    {% endfor %}
+</body>
+</html>

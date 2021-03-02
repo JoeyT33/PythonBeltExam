@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>{{allquotes.first_name}} {{allquotes.last_name}}' Quotes</h1> <a href="/quotes">Go Back</a>
+    {% for quotes in allquotes.posted_by.all %}
+    <p>{{quotes.firstName}} {{quotes.lastName}}: {{quotes.quote}}</p>
+    {% endfor %}
+
+</body>
+</html>
